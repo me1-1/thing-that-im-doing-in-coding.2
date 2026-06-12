@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash Coach</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="Cash Coach home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>
+          <strong>Cash Coach</strong>
+          <small>Money reset</small>
+        </span>
+      </a>
+
+      <nav class="nav-list" aria-label="Main sections">
+        <button class="nav-button active" type="button" data-jump="dashboard">Dashboard</button>
+        <button class="nav-button" type="button" data-jump="subscriptions">Subscription Audit</button>
+        <button class="nav-button" type="button" data-jump="spending-plan">Spending Plan</button>
+        <button class="nav-button" type="button" data-jump="lessons">Lessons</button>
+        <button class="nav-button" type="button" data-jump="group">Group Progress</button>
+      </nav>
+
+      <section class="coach-note" aria-label="Current coaching rule">
+        <h2>Rule of the week</h2>
+        <p>Money gets a job before it gets spent. Assign needs, savings, debt, and fun first.</p>
+      </section>
+    </aside>
+
+    <main id="top" class="main-content">
+      <section class="hero-band" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">A practical money trainer</p>
+          <h1 id="page-title">Stop leaking cash. Start making choices on purpose.</h1>
+          <p class="intro">Set up the people who need help, clean up waste, build a weekly plan, and practice the habits that make money stay put.</p>
+        </div>
+        <div class="money-visual" aria-label="Money flow from income to needs, savings, debt, and fun">
+          <div class="flow-node income">Income</div>
+          <div class="flow-grid">
+            <span>Needs</span>
+            <span>Savings</span>
+            <span>Debt</span>
+            <span>Fun</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h2>Who needs help today?</h2>
+          </div>
+          <button id="resetData" class="secondary-btn" type="button">Reset plan</button>
+        </div>
+
+        <form id="peopleForm" class="people-form" aria-label="People setup"></form>
+
+        <div id="personTabs" class="person-tabs" role="tablist" aria-label="People"></div>
+
+        <div class="dashboard-grid">
+          <article class="stat-card">
+            <span>Monthly income</span>
+            <strong id="incomeStat">$0</strong>
+          </article>
+          <article class="stat-card warning">
+            <span>Monthly subscriptions</span>
+            <strong id="subscriptionStat">$0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Possible savings</span>
+            <strong id="possibleSavingsStat">$0</strong>
+          </article>
+          <article class="stat-card danger">
+            <span>Risk score</span>
+            <strong id="riskStat">0</strong>
+          </article>
+        </div>
+
+        <div class="insight-layout">
+          <article class="teaching-card">
+            <h3 id="activePersonName">Person</h3>
+            <p id="coachSummary">Choose a person to begin.</p>
+            <div class="meter" aria-label="Money control score">
+              <span id="scoreBar"></span>
+            </div>
+            <p class="small-text" id="scoreText">Score: 0 out of 100</p>
+          </article>
+
+          <article class="teaching-card visual-card">
+            <h3>Where the money goes</h3>
+            <div id="cashBars" class="cash-bars" aria-label="Income allocation chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="subscriptions" class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Subscription Audit</p>
+            <h2>Cancel the apps that quietly eat the paycheck</h2>
+          </div>
+          <div class="audit-total">
+            <span>Marked to cancel</span>
+            <strong id="cancelTotal">$0/mo</strong>
+          </div>
+        </div>
+
+        <form id="subForm" class="inline-form">
+          <label>
+            App name
+            <input id="subName" type="text" placeholder="Streaming, game pass, storage">
+          </label>
+          <label>
+            Monthly cost
+            <input id="subCost" type="number" min="0" step="0.01" placeholder="9.99">
+          </label>
+          <button type="submit">Add subscription</button>
+        </form>
+
+        <div id="subscriptionList" class="subscription-list"></div>
+      </section>
+
+      <section id="spending-plan" class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Spending Plan</p>
+            <h2>Give every dollar a job</h2>
+          </div>
+          <span class="save-pill" id="planStatus">Saved automatically</span>
+        </div>
+
+        <div class="plan-grid">
+          <form id="budgetForm" class="budget-form">
+            <label>
+              Monthly income
+              <input id="incomeInput" type="number" min="0" step="1">
+            </label>
+            <label>
+              Needs and bills
+              <input id="needsInput" type="number" min="0" step="1">
+            </label>
+            <label>
+              Debt payments
+              <input id="debtInput" type="number" min="0" step="1">
+            </label>
+            <label>
+              Fun spending
+              <input id="funInput" type="number" min="0" step="1">
+            </label>
+            <label>
+              Savings goal
+              <input id="savingsGoalInput" type="number" min="0" step="1">
+            </label>
+          </form>
+
+          <article class="teaching-card">
+            <h3>Coach feedback</h3>
+            <ul id="budgetAdvice" class="advice-list"></ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Impulse Breaker</p>
+            <h2>Check a purchase before it checks you</h2>
+          </div>
+        </div>
+
+        <form id="purchaseForm" class="purchase-form">
+          <label>
+            Thing wanted
+            <input id="purchaseName" type="text" placeholder="New headphones">
+          </label>
+          <label>
+            Price
+            <input id="purchasePrice" type="number" min="0" step="0.01" placeholder="120">
+          </label>
+          <label>
+            Hourly pay
+            <input id="hourlyPay" type="number" min="0" step="0.01" placeholder="18">
+          </label>
+          <button type="submit">Coach me</button>
+        </form>
+        <div id="purchaseResult" class="result-box" aria-live="polite"></div>
+      </section>
+
+      <section id="lessons" class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Lessons</p>
+            <h2>Short drills that build better habits</h2>
+          </div>
+        </div>
+
+        <div id="lessonGrid" class="lesson-grid"></div>
+      </section>
+
+      <section id="group" class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Group Progress</p>
+            <h2>The cash reset group</h2>
+          </div>
+        </div>
+        <div id="groupGrid" class="group-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
